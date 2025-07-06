@@ -3,27 +3,30 @@
 /*
 		% kadar putstr, % görünce uygun tepki, sonraki % ye kadar putstr
 */
-
+int	ft_which_output(char c)
+{}
 int	ft_printf(const char *string, ...)
 {
+	int		n;
 	va_list args;
-	va_start(args, string);
 
+	va_start(args, string);
+	
 	if (!string)
 	{
-		if (!args)
+		if (!ft_how_many_args)
 		{
-			while (*string != '%' && *string != '\0')
-				ft_putchar_fd(*string++, 1);
-			if (*string++ == '%')
-			{
-				if (ft_istype(ARG_TYPE, string) == 'c')
-					ft_putchar_fd(va_arg(args, int), 1);
-			}
+			ft_putstr_fd(string, 1);
+			return (ft_strlen(string));
+		}
+		while (n < ft_how_many_args(string))
+		{
+			
 		}
 		ft_putstr_fd(string, 1);
 	}
 }
+
 /*
 	deneme(char *s, char c)
 	{ 

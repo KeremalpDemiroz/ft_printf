@@ -4,7 +4,9 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 
-SRCS =	ft_istype.c
+SRCS =	ft_istype.c\
+		ft_how_many_args.c\
+		ft_int_putstr.c
 		
 
 SRCS_LIBFT = ../Sources/libft.a

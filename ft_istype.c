@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	ft_istype(const char *type, char *c)
+char	ft_istype(const char *type, const char *c)
 {
 	while (*type)
 	{
