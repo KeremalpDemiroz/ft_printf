@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_istype.c                                        :+:      :+:    :+:   */
+/*   ft_int_puthex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kedemiro <kedemiro@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 22:09:39 by kedemiro          #+#    #+#             */
-/*   Updated: 2025/07/07 22:13:10 by kedemiro         ###   ########.fr       */
+/*   Created: 2025/07/07 19:40:48 by kedemiro          #+#    #+#             */
+/*   Updated: 2025/07/07 20:13:49 by kedemiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
-char	ft_istype(const char *type, const char *str)
+int ft_int_puthex(unsigned int nbr, char c)
 {
-	if (*str == '%' && *str + 1)
+	int		total;
+	char	*base;
+	
+	total = 0;
+	if (c == 'x')
+		base = HEX_LOWER;
+	else if (c == 'X')
+		base = HEX_UPPER;
+	if (nbr < 16)
 	{
-		while (*type)
-		{
-			if (*type == *(str + 1))
-				return (*type);
-			type++;
-		}
+		write(1, &base[nbr], 1);
+		return (1);
 	}
-	return (0);
+	if (nbr >= 16)
+	{
+		total += ft_int_puthex(nbr / 16, c);
+		total += ft_int_puthex(nbr % 16, c);
+	}
+	return (total);
 }
+

@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_istype.c                                        :+:      :+:    :+:   */
+/*   ft_int_putchar.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kedemiro <kedemiro@student.42istanbul.com. +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/05 22:09:39 by kedemiro          #+#    #+#             */
-/*   Updated: 2025/07/07 22:13:10 by kedemiro         ###   ########.fr       */
+/*   Created: 2025/07/07 21:54:09 by kedemiro          #+#    #+#             */
+/*   Updated: 2025/07/07 21:58:32 by kedemiro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include <stdio.h>
 
-char	ft_istype(const char *type, const char *str)
+int	ft_int_putchar(const char c)
 {
-	if (*str == '%' && *str + 1)
-	{
-		while (*type)
-		{
-			if (*type == *(str + 1))
-				return (*type);
-			type++;
-		}
-	}
-	return (0);
+	write(1, &c, 1);
+	return (1);
 }

@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include "Libft/libft.h"
-#include "libftprintf.h"
 //% adetini bul, eğeri %den sonra bir şey yoksa bu bir hata, orijinal çıktı vermiyor bu durumda. 
 // "%c %" de bile çıktı yok.
 // "%s" ama karşılık gelen arg yoksa (null)
@@ -19,51 +16,9 @@
 // 8 bitlik charlarda % yi string  gibi yazıyor ama 7 bitliklerde çıktı yok. WTF!!!
 // DÜzeltme -> $ işaretinde de yazdı derdi 8 bitlikler değil. ne mk bunun derdi -> $ tanımlı ve ğ salak bi ascii olduğu içinn yazıyormuş.
 
-size_t	ft_how_many_args(const char *str)
-{
-	size_t arg_count;
-	if (str)
-	{
-		while (*str)
-		{
-			if (*str++ == '%')
-			{
-				if (*str == ft_istype(ARG_TYPE, str))
-				{
-					arg_count++;
-				}
-				else
-					return (0);
-			}
-		}
-		return (arg_count);
-	}
-	return (0);
-}
+#include "libftprintf.h"
 
-char	ft_istype(const char *type, char *c)
-{
-	while (*type)
-	{
-		if (*type == *c)
-			return (*type);
-		type++;
-	}
-	return (0);
-}
-int	ft_printf(const char *string, ...)
-{
-	va_list args;
-	va_start(args, string);
-
-	if (!string)
-	{
-		if (!ft_how_many_args(string))
-			return (ft_int_putstr(string));
-		while ()
-	}
-}
 int main()
 {
-	ft_printf("merhaba dünya %c", 'c');
+	ft_printf("merhaba dünya %c", 'a' );
 }

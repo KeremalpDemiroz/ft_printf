@@ -6,7 +6,14 @@ CFLAGS = -Wall -Werror -Wextra
 
 SRCS =	ft_istype.c\
 		ft_how_many_args.c\
-		ft_int_putstr.c
+		ft_int_putstr.c\
+		ft_int_putnbr.c\
+		ft_int_puthex.c\
+		ft_int_putptr.c\
+		ft_int_putunbr.c\
+		ft_printf.c\
+		ft_int_putchar.c
+
 		
 
 SRCS_LIBFT = ../Sources/libft.a
