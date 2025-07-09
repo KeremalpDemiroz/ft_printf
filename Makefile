@@ -1,43 +1,49 @@
-NAME = libftprintf.a
+NAME=libftprintf.a
 
-CC = cc
+SRCS=ft_control.c\
+	ft_printf.c\
+	ft_puts.c
 
-CFLAGS = -Wall -Werror -Wextra
+OBJS= $(SRCS:.c=.o)
 
-SRCS =	ft_istype.c\
-		ft_how_many_args.c\
-		ft_int_putstr.c\
-		ft_int_putnbr.c\
-		ft_int_puthex.c\
-		ft_int_putptr.c\
-		ft_int_putunbr.c\
-		ft_printf.c\
-		ft_int_putchar.c
+RESET   = \033[0m
+GREEN   = \033[1;32m
+YELLOW  = \033[1;33m
+BLUE    = \033[1;34m
+CYAN    = \033[1;36m
+RED     = \033[1;31m
 
-		
-
-SRCS_LIBFT = ../Sources/libft.a
+CC=cc
+CFLAGS=-Wall -Werror -Wextra
 
 
-OBJC = $(SRCS:.c=.o)
-all:$(NAME)
-$(NAME):$(OBJC)
-	@ar rcs $(NAME) $(OBJC)
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+all: $(NAME)
+$(NAME): $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
+	@echo "$(GREEN) $(NAME) is CREATED!$(RESET)"
 
 clean:
-	@rm -rf $(OBJC)
+	@rm -f $(OBJS)
+	@echo "$(RED) Objects are DELETED!$(RESET)"
 
-fclean:clean
-	@rm -rf $(NAME)
+fclean: clean
+	@rm -f $(NAME)
+	@echo "$(RED) $(NAME) is DELETED!$(RESET)"
 
-re:fclean all
+re: fclean all
 
-run:all clean
+run: all clean
+	$(CC) main.c $(NAME)
 	clear
-	@$(CC) $(CFLAGS) main.c $(NAME)
+	@echo "$(YELLOW) Main.c is Running...$(RESET)"
 	@./a.out
 
-norm: $(SRCS)
-	@norminette /srcs/$(SRCS)
+norm:
+	clear
+	@echo "$(YELLOW)Checking Norms... $(RESET)"
+	@norminette $(SRCS) printf.h
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re run norm

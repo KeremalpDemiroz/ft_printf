@@ -1,73 +1,40 @@
-#include "libftprintf.h"
-#include <stdio.h>
-/*
-		% kadar putstr, % görünce uygun tepki, sonraki % ye kadar putstr
-*/
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kedemiro <kedemiro@student.42istanbul.com. +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 23:07:11 by kedemiro          #+#    #+#             */
+/*   Updated: 2025/07/09 05:52:56 by kedemiro         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "printf.h"
 
 int	ft_printf(const char *string, ...)
 {
-	int		n;
+	va_list	arg;
 	int		total;
-	int		i;
-	char type;
-	va_list args;
+	char	type;
 
-	va_start(args, string);
-	n = 0;
-	i = 0;
 	total = 0;
-	if (string)
+	va_start(arg, string);
+	if (*string)
 	{
-		if (ft_how_many_args(string) == 0)
-			return (ft_int_putstr(string));
-		while (string[i + total] != '\0')
+		while (*string)
 		{
-			while (string[i + total] != '%' && string[i + total] != '\0')
-				total += ft_int_putstr(string);
-			if (n < ft_how_many_args(string))
+			if (*string == '%')
 			{
-				type = ft_istype(ARG_TYPE, (string + total));
-				if (type == 'c')
-					total += ft_int_putchar((const char)va_arg(args, int));
-				else if (type == 's')
-					total += ft_int_putstr(va_arg(args, char *));
-				else if (type == 'p')
-					total += ft_int_putptr((void *)va_arg(args,unsigned long));
-				else if (type == 'd' || type == 'i')
-					total += ft_int_putnbr(va_arg(args,int));
-				else if (type == 'u')
-					total += ft_int_putunbr(va_arg(args, unsigned int));
-				else if (type == 'x' || type == 'X')
-					total += ft_int_puthex(type, va_arg(args, unsigned int));
-				else if (type == '%')
-					total += ft_int_putchar('%');
-				n++;
+				type = ft_istype(ARGS_TYPE, string++);
+				if (type)
+					total += ft_response(type, arg);
 			}
+			else
+				total += ft_putchar(*string);
+			string++;
 		}
-		return (total);
 	}
-	return (-1);
+	va_end(arg);
+	return (total);
 }
-
-/*
-	deneme(char *s, char c)
-	{ 
-		if (c == s)
-			putstr;
-		else if(c == c)
-			putchar;
-		else if 
-	}
-
-			c		s		p		d		i		u		x		X		%
-		 |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----|
-   ascii | 099 | | 115 | | 112 | | 100 | | 105 | | 117 | | 120 | | 088 | | 037 |
-		 |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----|
-   mod   |	   | |     | |     | |     | |     | |     | |     | |     | |	   |
-		 |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----|
-   kat	 |	   | |     | |     | |     | |     | |     | |     | |     | |	   |
-		 |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----|
-   bölen |     | |     | |	   | |	   | |	   | |     | |     | |     | |	   |
-		 |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----| |-----|
-
-*/
